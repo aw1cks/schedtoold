@@ -23,7 +23,7 @@
 #define SCHED_VERSION "0.3"
 
 
-#warning XXX - Make us non-global - please :)
+//warning XXX - Make us non-global - please :)
 static char exename[1024];	/* name with path from /proc/pid/exe */
 static char statusname[1024];	/* name from /proc/pid/status */
 static uid_t proc_uid;		/* uid of pid */
@@ -124,7 +124,11 @@ getProcInfo (pid_t pid)
    * /proc/pid/cmdline
    */
   snprintf (exename, 1023, "/proc/%i/exe", pid);
-  if ((exename_len = readlink (exename, exename, 1023)) > 0)
+  char *buf;
+  buf = malloc(1023);
+  exename_len = readlink(exename, buf, 1023);
+  //if ((exename_len = readlink (exename, exename, 1023)) > 0)
+  if(exename_len > 0)
   {
     char *binaryname;		/* the binary without path from exename */
     char cmdline[1024];		/* proc/pid/cmdline */

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O2 -Wall -g
+CFLAGS = -O2 -Wall -g -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wjump-misses-init -Wdouble-promotion -Wshadow -Wformat=2
 OBJ = utils.o pid-handler.o config-handler.o main.o
 DEPS = utils.h pid-handler.h config-handler.h
 INSTALL = install

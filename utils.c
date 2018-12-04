@@ -54,7 +54,7 @@ msg (char *output, ...)
   vsnprintf (infostr, 256, output, list);
   va_end (list);
   if (run_daemon)
-    syslog (LOG_DAEMON | LOG_INFO, infostr);
+    syslog (LOG_DAEMON | LOG_INFO, "%s", infostr);
   else
     printf ("%s\n", infostr);
 }

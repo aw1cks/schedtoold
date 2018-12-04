@@ -42,19 +42,22 @@ void pidListDump (void);
  * check status of pid 
  * return: PID_SET, PID_NOT_SED or PID_RETRY
  */
-inline int pidGetStatus (int index);
+//inline int pidGetStatus (int index);
+int pidGetStatus(int index);
 
 /*
  * set status of pid
  */
-inline void pidSetStatus (int index, int pid_value);
+//inline void pidSetStatus (int index, int pid_value);
+void pidSetStatus(int index, int pid_value);
 
 /*
  * read all pids from /proc
  * update in-memory list
  * attempt schedtool action
  */
-inline int pidUpdateViaProc (void);
+//inline int pidUpdateViaProc (void);
+int pidUpdateViaProc(void);
 
 
 #endif

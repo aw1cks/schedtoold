@@ -180,13 +180,12 @@ pidUpdateViaProc ()
     while (n--)
     {
       int pid;
-      int index;
 
       /* add to pid list */
       pid = atoi (namelist[n]->d_name);
       if (pid > PID_IGNORE)
 	/* add to list */
-	index = pidListAdd (pid);
+	pidListAdd (pid);
 
       /* free element */
       free (namelist[n]);
