@@ -1,0 +1,33 @@
+Version 0.3
+- renamed to schedtoold (instead of scheD) for gentoo packaging conformance
+- renamed sched.cfg to schedtoold.conf, it's more "standard" conform 
+  (Andreas Mohr)
+- new features:
+  - "-p pid_file" option
+  - "-u sec" option to set update interval
+  - possibility to define rules per user or group in schedtoold.conf
+    look at doc/README and doc/schedtoold.conf-example
+  - absolute paths for executables are now supported, like /usr/bin/xmms
+    AND STRONGLY RECOMMENDED! Look at doc/README for details.
+    (Solution isn't perfect yet. See discussion on ck-mailing list.)
+  - gentoo and debian init-scripts (thanks Ray for his contribution)
+  - running as non-root is now supported, only processes with schedtoold's
+    uid will be touched
+- fixes:
+  - wildcard support
+  - changed error messages of schedtool (Javier Kohen)
+  - spelling fixes (Andreas Mohr)
+
+Version 0.2
+- support for wildcards (name* , but the '*' must be at the end of programm
+name)
+- improved config file handling (f.e. no limit for count of configured programms)
+- more error checking
+- verbose improved (when running -v)
+- use pid_t instead of int
+- updated sched.cfg example
+- added schedtool-1.2.4.patch for newer ck-patchset to handle SCHED_ISO right
+- last and least: run indent to format source code :)
+
+Version 0.1
+- initial release 

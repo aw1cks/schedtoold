@@ -1,0 +1,26 @@
+#!/bin/sh
+# Start/stop the schedtool daemon schedtoold.
+
+BINARY=/usr/bin/schedtoold
+
+test -f $BINARY || exit 0
+
+case "$1" in
+start)  echo -n "Starting schedtool daemon: schedtoold"
+        start-stop-daemon --start --quiet --exec $BINARY
+        echo "."
+        ;;
+stop)   echo -n "Stopping schedtool daemon: schedtoold"
+        start-stop-daemon --stop --quiet --exec $BINARY
+        echo "."
+        ;;
+restart) echo -n "Restarting schedtool daemon: schedtoold"
+        start-stop-daemon --stop --quiet --exec $BINARY
+        start-stop-daemon --start --quiet --exec $BINARY
+        echo "."
+        ;;
+*)      echo "Usage: /etc/init.d/schedtoold start|stop|restart"
+        exit 1
+        ;;
+esac
+exit 0

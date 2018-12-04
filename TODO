@@ -1,0 +1,8 @@
+TODO for schedtoold:
+- better way to get notified about process creation instead of current polling
+- identify proccess correct with it's full path
+  What about java, mono, ... ??
+- reload config and update all proccess after SIG_HUP
+- may included schedtool itself into binary (should be faster and return values
+  of schedtool can be used)
+- add more usefull examples (also add them on homepage)

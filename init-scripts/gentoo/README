@@ -1,0 +1,9 @@
+Instructions:
+
+0) make sure to have installed schedtoold (make; make install)
+1) copy sched to /etc/init.d/schedtoold
+2) edit /etc/schedtoold.conf to your needs (example found in this archive)
+3) start it via /etc/init.d/schedtoold start
+4) if you want it to be started at bootup run "rc-update add schedtoold default"
+
+

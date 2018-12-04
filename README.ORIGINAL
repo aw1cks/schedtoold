@@ -1,0 +1,107 @@
+What is schedtoold? 
+-------------------
+
+It's a very simple daemon to renice/nice and change priorities of processes 
+while running them. That's done by schedtool (http://freequaos.host.sk/schedtool)
+
+My intention writing schedtoold was to get audio played propably (via xmms, 
+rhymthbox  or realplayer) on my iBook. The problem was audio stutters when I 
+started Mac-On-Linux, because of MOL takes the highest priority on my system. 
+Setting  xmms and others to SCHED_ISO works very well. schedtoold does it for 
+you, always when starting these programms. No interaction required.
+
+Another example is, to let emerge/qpkg/apt-get/... to be batched (SCHED_BATCH) -
+so your "normal" work isn't disturbed.
+
+Also it seems usefull to batch kio-slaves (for instance mp3 conversation) to get
+a more responsible KDE (was reported by Jos).
+
+Not sure what SCHED_ISO, SCHED_BATCH, SCHED_RR and others are?
+Look http://bhhdoa.org.au/pipermail/ck/2004-October/001169.html
+
+Before using it!
+----------------
+
+Use schedtoold at your _OWN_ risk!
+You must agree before using schedtoold.
+
+
+How it works?
+-------------
+
+It scans /proc for new PIDs. After looking into /proc/pid/exec and
+/proc/pid/status to get the process' name it looks into it's config and runs 
+schedtool if neccassary. 
+
+Currently it looks into /proc every 2 seconds (default; use [-u sec] to 
+overwrite).  Is there a better way to get notified when a process is started?
+Let me know!
+
+
+How to get it running?
+----------------------
+
+Install schedtool into PATH.
+Unpack schedtoold-tarball.
+Compile via "make".
+Install via "make install" into /usr/bin.
+Run "schedtoold -h" to get a quick overview about command line options.
+Now go and configure (see below). 
+
+
+How to configure?
+-----------------
+
+Place an schedtoold.conf in /etc with following format:
+  [%group:|user:]   program-name    schedtool parameter
+Examples:
+  root: /usr/bin/xmms   -I
+  %users: dpkg   -B
+  kio_*  -B
+
+# Note:
+#   Rules are parsed from top downwards. The first rule matches is valid!
+
+# WARNING: 
+#   Adding programms without absolute paths could be used to make your computer
+#   unusable!
+#   For instance:
+#   Adding "mplayer -R" causes every programm named mplayer to become SCHED_RR 
+#   - even those created in every directories and started by non-root users. The
+#   programm could burn all your CPU cycles.
+#   So DO NOT use SCHED_RR, SCHED_ISO and negative renice without absolute paths
+#   to the executables!
+
+# WARNING:
+#   Wildcards are also valid for directories!
+#   E.g. "/usr/bin* -B" will SCHED_BATCH every programms located in /usr/bin! 
+
+Settings per user or group are supported.
+ example 1: set xmms only to SCHED_ISO if running in group users
+   %users: /usr/bin/xmms -I
+ example 2: only allow root to run xmms as SCHED_ISO
+   root:  xmms -I
+ example 3: allow ALL users to run xmms as SCHED_ISO
+   ALL: xmms -I
+ If no group or user is given ALL: is assumed.
+
+Look at example/schedtoold.conf for more information and more examples.
+
+
+Credits
+-------
+
+For testing and comments I want to say Thanks to all of you!
+Idea was taken from ck-mailing list and 
+http://industrialstrengthsolutions.com/prioryd/
+Schedtool can be found here: http://freequaos.host.sk/schedtool/
+
+
+Please
+------
+
+Please feel free to send BUG reports (I'm sure you'll find some), suggestions 
+and comments.
+
+
+

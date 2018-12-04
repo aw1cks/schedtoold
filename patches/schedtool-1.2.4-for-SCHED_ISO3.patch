@@ -1,0 +1,28 @@
+diff -uPr schedtool-1.2.4/schedtool.c schedtool-1.2.4-cr7/schedtool.c
+--- schedtool-1.2.4/schedtool.c	2004-11-28 14:36:20.000000000 +0100
++++ schedtool-1.2.4-cr7/schedtool.c	2005-02-10 13:22:20.000000000 +0100
+@@ -236,13 +236,13 @@
+          ARGH!
+ 	 */
+ 	/* for _BATCH and _NORMAL, prio is ignored and must be 0 */
+-	if((policy==SCHED_NORMAL || policy==SCHED_BATCH || policy==SCHED_ISO) && prio) {
++	if((policy==SCHED_NORMAL || policy==SCHED_BATCH) && prio) {
+ 		decode_error("%s call may fail as static PRIO must be 0 or omitted",
+ 			     TAB[policy]
+ 			    );
+ 
+ 	/* _FIFO and _RR MUST have prio set */
+-	} else if((policy==SCHED_FIFO || policy==SCHED_RR)) {
++	} else if((policy==SCHED_FIFO || policy==SCHED_RR || policy==SCHED_ISO)) {
+ 
+ #define CHECK_RANGE_PRIO(p, p_low, p_high) (p <= (p_high) && p >= (p_low))
+ 		/* FIFO and RR - check min/max priority */
+@@ -618,7 +618,7 @@
+ 	       "    -F -p PRIO            for SCHED_FIFO       only as root\n" \
+ 	       "    -R -p PRIO            for SCHED_RR         only as root\n" \
+                "    -B                    for SCHED_BATCH\n" \
+-               "    -I                    for SCHED_ISO\n\n" \
++               "    -I -p PRIO            for SCHED_ISO\n\n" \
+                "    -M POLICY             for manual mode; raw number for POLICY\n" \
+ 	       "    -p STATIC_PRIORITY    usually 1-99; only for FIFO or RR\n" \
+ 	       "                          higher numbers means higher priority\n" \
