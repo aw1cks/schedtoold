@@ -17,7 +17,8 @@ schedtoold: $(OBJ)
 
 install: schedtoold
 	strip ./schedtoold
-	$(INSTALL) -D -m 755 -s ./schedtoold $(DESTDIR)/usr/bin/schedtoold
+	$(INSTALL) -D -m 755 -s ./schedtoold /usr/bin/schedtoold
+	$(INSTALL) -D  -m 644 ./init-scripts/systemd/schedtoold.service /usr/lib/systemd/system/schedtoold.service
 clean:
 	-rm -f ./$(OBJ) ./schedtoold
 
